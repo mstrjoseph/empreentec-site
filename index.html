@@ -48,16 +48,16 @@
         Mural de Oportunidades
       </button>
       <button onclick="switchView('nfc')" id="nav-nfc" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all flex items-center justify-between">
-        <span>Canal NFC</span>
+        <span>Pulseira NFC</span>
         <span class="text-[9px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded font-bold">TAG</span>
       </button>
       <button onclick="switchView('dashboard')" id="nav-dashboard" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
-        Analytics & Painel
+        Dashboard do Vendedor
       </button>
     </div>
 
-    <!-- BOTÕES DE AÇÃO -->
-    <div class="p-4 border-t border-slate-800 space-y-2">
+    <!-- BOTÃO DE AÇÃO -->
+    <div class="p-4 border-t border-slate-800">
       <button onclick="switchView('register-entrepreneur')" class="w-full bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs py-2.5 px-4 rounded-xl transition-all shadow-lg shadow-emerald-950/20">
         Criar Minha Presença Digital
       </button>
@@ -67,9 +67,16 @@
   <!-- ÁREA DE CONTEÚDO PRINCIPAL -->
   <div class="flex-1 flex flex-col min-h-screen relative">
 
+    <!-- BOTÃO FLUTUANTE DO CARRINHO -->
+    <button onclick="toggleCartModal()" class="fixed bottom-6 right-6 z-40 bg-emerald-400 hover:bg-emerald-300 text-slate-950 p-4 rounded-2xl shadow-xl flex items-center gap-3 transition-all active:scale-95 font-bold text-sm">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
+      <span>Carrinho / Pedidos</span>
+      <span id="cart-count" class="bg-slate-950 text-emerald-400 text-xs px-2 py-0.5 rounded-full font-black">0</span>
+    </button>
+
     <main class="flex-1 max-w-5xl w-full mx-auto px-8 py-10">
 
-      <!-- VIEW: HOME -->
+      <!-- VIEW: HOME / PROPOSTA DE VALOR -->
       <section id="view-home" class="page-view space-y-12">
         <div class="bg-[#111623] border border-slate-800 p-10 rounded-3xl relative overflow-hidden">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-6">
@@ -114,29 +121,50 @@
               <ul class="text-xs text-slate-300 space-y-2 list-disc list-inside">
                 <li>Ganha um link e página própria: <span class="text-emerald-400 font-mono">empreentec.com/joao-trufas</span></li>
                 <li>Público local descobre seu trabalho e sua história.</li>
-                <li>Chat direto na plataforma para negociações e entregas.</li>
+                <li>Chat ao vivo + Checkout PIX para fechar vendas no campus.</li>
                 <li>Aproximação via Pulseira NFC no campus.</li>
               </ul>
             </div>
           </div>
         </div>
+
+        <!-- ECOSSISTEMA -->
+        <div>
+          <h2 class="text-2xl font-bold text-white mb-6">Um ecossistema completo de visibilidade</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl">
+              <span class="text-xs font-bold text-emerald-400">01. Perfil Próprio</span>
+              <p class="text-xs text-slate-400 mt-2">O site que o pequeno vendedor de trufa ou artesanato não teria como construir do zero.</p>
+            </div>
+            <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl">
+              <span class="text-xs font-bold text-emerald-400">02. Descoberta</span>
+              <p class="text-xs text-slate-400 mt-2">Ambiente para o consumidor local descobrir "quem está fazendo o quê" por perto.</p>
+            </div>
+            <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl">
+              <span class="text-xs font-bold text-emerald-400">03. Mural & Match</span>
+              <p class="text-xs text-slate-400 mt-2">Conexão direta entre quem precisa de um serviço e quem oferece.</p>
+            </div>
+            <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl">
+              <span class="text-xs font-bold text-emerald-400">04. Analytics & NFC</span>
+              <p class="text-xs text-slate-400 mt-2">Métricas de acesso e aproximação rápida via pulseira para acelerar o contato.</p>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <!-- VIEW: DESCOBRIR EMPREENDEDORES -->
+      <!-- VIEW: VITRINE COM FILTROS -->
       <section id="view-explore" class="page-view hidden space-y-6">
-        <div class="flex justify-between items-center">
-          <div>
-            <h2 class="text-2xl font-bold text-white">Descubra os Empreendedores do Campus</h2>
-            <p class="text-slate-400 text-xs mt-1">Conheça os alunos, artesãos e produtores que movimentam nossa comunidade.</p>
-          </div>
+        <div>
+          <h2 class="text-2xl font-bold text-white">Descubra os Empreendedores do Campus</h2>
+          <p class="text-slate-400 text-xs mt-1">Conheça os alunos, artesãos e produtores que movimentam nossa comunidade.</p>
         </div>
 
         <!-- FILTROS DE CATEGORIA -->
         <div class="flex gap-2 overflow-x-auto pb-2">
-          <button onclick="filterCategory('all')" class="bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap">Todas</button>
-          <button onclick="filterCategory('Doces')" class="bg-slate-800 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-slate-700">🍬 Doces & Lanches</button>
-          <button onclick="filterCategory('Artesanato')" class="bg-slate-800 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-slate-700">🎨 Artesanato</button>
-          <button onclick="filterCategory('Serviços')" class="bg-slate-800 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-slate-700">💼 Serviços & Mídia</button>
+          <button onclick="filterCategory('all')" class="bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap">Todas</button>
+          <button onclick="filterCategory('Doces')" class="bg-slate-800 border border-slate-700 text-slate-300 px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-slate-700">🍬 Doces & Lanches</button>
+          <button onclick="filterCategory('Artesanato')" class="bg-slate-800 border border-slate-700 text-slate-300 px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-slate-700">🎨 Artesanato</button>
+          <button onclick="filterCategory('Serviços')" class="bg-slate-800 border border-slate-700 text-slate-300 px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-slate-700">💼 Serviços & Mídia</button>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="entrepreneurs-list"></div>
@@ -156,7 +184,7 @@
             <div id="profile-products" class="space-y-3"></div>
           </div>
 
-          <!-- ÁREA DO CHAT -->
+          <!-- ÁREA DO CHAT AO VIVO -->
           <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl flex flex-col justify-between h-[380px]">
             <div>
               <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
@@ -180,7 +208,7 @@
         </div>
       </section>
 
-      <!-- VIEW: MURAL -->
+      <!-- VIEW: MURAL DE OPORTUNIDADES -->
       <section id="view-mural" class="page-view hidden space-y-6">
         <div>
           <h2 class="text-2xl font-bold text-white">Mural de Oportunidades</h2>
@@ -195,44 +223,83 @@
             </div>
             <button onclick="alert('Conexão iniciada com o organizador!')" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs px-4 py-2 rounded-xl">Candidatar-se</button>
           </div>
+          <div class="bg-[#111623] border border-slate-800 p-6 rounded-2xl flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-md uppercase">Design & Mídia</span>
+              <h4 class="text-sm font-bold text-white mt-2">Procuro gráfica para impressão de crachás e banners</h4>
+              <p class="text-xs text-slate-400 mt-1">Aceleradora ITA Ventures • Orçamento: R$ 500,00</p>
+            </div>
+            <button onclick="alert('Conexão iniciada!')" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs px-4 py-2 rounded-xl">Propor Serviço</button>
+          </div>
         </div>
       </section>
 
-      <!-- VIEW: CANAL NFC -->
+      <!-- VIEW: PULSEIRA NFC -->
       <section id="view-nfc" class="page-view hidden space-y-6">
         <div class="bg-[#111623] border border-slate-800 p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8">
           <div class="space-y-4 max-w-md">
             <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">CANAL FÍSICO DE DESCOBERTA</span>
-            <h2 class="text-3xl font-extrabold text-white">Aproximação que vira venda.</h2>
+            <h2 class="text-3xl font-extrabold text-white">Sua ideia mais perto do mundo.</h2>
             <p class="text-slate-300 text-xs leading-relaxed">
-              A pulseira NFC da empreenTEC é a ponte física para o seu perfil digital. O cliente só precisa aproximar o celular para abrir sua vitrine inteira na hora.
+              Com a tecnologia NFC, o cliente aproxima o celular da sua pulseira EmpreenTEC e é direcionado automaticamente para o seu perfil e vitrine dentro do campus.
             </p>
+            <p class="text-[11px] font-mono text-emerald-400">NFC &rarr; Perfil Profissional &rarr; Produtos &rarr; Contato / Chat</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl w-full max-w-xs text-center space-y-3">
+            <div class="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            </div>
+            <p class="text-xs font-bold text-white">Aproximação Instantânea</p>
+            <p class="text-[11px] text-slate-500">Transforme conversas no campus em vendas diretas sem precisar passar redes sociais.</p>
           </div>
         </div>
       </section>
 
-      <!-- VIEW: DASHBOARD -->
+      <!-- VIEW: DASHBOARD COMPLETO COM GRÁFICOS -->
       <section id="view-dashboard" class="page-view hidden space-y-6">
         <div class="flex justify-between items-center border-b border-slate-800 pb-4">
           <div>
-            <h2 class="text-2xl font-bold text-white">Analytics do Seu Negócio</h2>
-            <p class="text-slate-400 text-xs">Acompanhe quem está descobrindo sua marca dentro da plataforma.</p>
+            <h2 class="text-2xl font-bold text-white">Dashboard do Vendedor</h2>
+            <p class="text-slate-400 text-xs">Acompanhe seus acessos e o alcance do seu negócio além do seu círculo.</p>
           </div>
+          <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full font-semibold">Perfil Ativo</span>
         </div>
 
+        <!-- METRICAS DE DESEMPENHO -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl">
             <span class="text-slate-400 text-xs font-medium">Acessos à Sua Página</span>
             <p class="text-2xl font-extrabold text-white mt-1">1.248</p>
+            <span class="text-[10px] text-emerald-400 font-bold">+45% fora do seu círculo</span>
           </div>
           <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl">
-            <span class="text-slate-400 text-xs font-medium">Conversas Iniciadas</span>
-            <p class="text-2xl font-extrabold text-emerald-400 mt-1">154</p>
+            <span class="text-slate-400 text-xs font-medium">Contatos no Chat</span>
+            <p class="text-2xl font-extrabold text-emerald-400 mt-1">342</p>
+            <span class="text-[10px] text-emerald-400 font-bold">+16% este mês</span>
           </div>
           <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl">
-            <span class="text-slate-400 text-xs font-medium">Descobertas via NFC</span>
-            <p class="text-2xl font-extrabold text-white mt-1">89</p>
+            <span class="text-slate-400 text-xs font-medium">Vendas Realizadas (PIX)</span>
+            <p class="text-2xl font-extrabold text-white mt-1">46</p>
+            <span class="text-[10px] text-emerald-400 font-bold">R$ 575,00 acumulados</span>
           </div>
+        </div>
+
+        <!-- GRÁFICO DE ORIGEM DOS ACESSOS -->
+        <div class="bg-[#111623] border border-slate-800 p-6 rounded-2xl">
+          <h3 class="text-sm font-bold text-white mb-4">Evolução de Acessos ao Perfil</h3>
+          <div class="h-48 w-full">
+            <canvas id="accessChart"></canvas>
+          </div>
+        </div>
+
+        <!-- FORMULÁRIO PARA CADASTRAR PRODUTOS NO PAINEL -->
+        <div class="bg-[#111623] border border-slate-800 p-6 rounded-2xl space-y-4">
+          <h3 class="text-sm font-bold text-white">Adicionar Novo Item ao Seu Catálogo</h3>
+          <form onsubmit="handleAddProduct(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <input type="text" id="prod-title" required placeholder="Nome do item (ex: Trufa Maracujá)" class="bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white">
+            <input type="number" step="0.01" id="prod-price" required placeholder="Preço (Ex: 5.00)" class="bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white">
+            <button type="submit" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs py-2 rounded-xl">+ Cadastrar Produto</button>
+          </form>
         </div>
       </section>
 
@@ -251,6 +318,10 @@
             <label class="block text-xs font-semibold text-slate-300 mb-1">Nome do Negócio</label>
             <input type="text" id="reg-business" required placeholder="Ex: Doces do João" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white">
           </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Chave PIX (Para receber pagamentos)</label>
+            <input type="text" id="reg-pix" required placeholder="Chave PIX do vendedor" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white">
+          </div>
           <button type="submit" class="w-full bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs py-3 rounded-xl transition-all">
             Publicar Minha Página na empreenTEC
           </button>
@@ -261,8 +332,37 @@
 
   </div>
 
+  <!-- MODAL CARRINHO / CHECKOUT PIX AUTOMÁTICO -->
+  <div id="cart-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-[#111623] border border-slate-800 w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
+      <button onclick="toggleCartModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">&times;</button>
+      <h3 class="text-lg font-bold text-white mb-4">Seu Carrinho</h3>
+      
+      <div id="cart-items" class="space-y-3 max-h-60 overflow-y-auto mb-4"></div>
+      
+      <div class="border-t border-slate-800 pt-4 mb-4 flex justify-between items-center text-sm font-semibold">
+        <span>Total do Pedido:</span>
+        <span id="cart-total" class="text-emerald-400 font-bold text-base">R$ 0,00</span>
+      </div>
+
+      <!-- ÁREA PIX GERADA -->
+      <div id="pix-area" class="hidden bg-slate-900 border border-emerald-500/30 p-4 rounded-xl text-center space-y-2 mb-4">
+        <span class="text-[10px] font-bold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded uppercase">Pagamento PIX</span>
+        <p class="text-xs text-slate-300">Copie a Chave PIX do Vendedor:</p>
+        <p id="pix-key-display" class="text-xs font-mono text-emerald-400 bg-slate-950 p-2 rounded border border-slate-800 select-all truncate"></p>
+      </div>
+
+      <button id="btn-checkout" onclick="generatePixCheckout()" class="w-full bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs py-3 rounded-xl transition-all">
+        Gerar Chave PIX
+      </button>
+    </div>
+  </div>
+
   <!-- SCRIPT -->
   <script>
+    let cart = [];
+    let currentVendorPix = 'joao.doces@pix.com';
+
     const entrepreneursData = {
       joao: {
         id: 'joao',
@@ -270,6 +370,7 @@
         businessName: "Doces do João",
         category: "Doces",
         status: "🟢 No Bloco XXI até 21h",
+        pixKey: "joao.doces@pix.com",
         link: "empreentec.com/joao-trufas",
         bio: "Produzo trufas artesanais frescas diariamente para financiar meus estudos no campus.",
         products: [
@@ -284,11 +385,12 @@
         businessName: "Arte em Nós & Peças",
         category: "Artesanato",
         status: "🟢 Expondo na Convivência",
+        pixKey: "mariana.arte@pix.com",
         link: "empreentec.com/arte-em-nos",
         bio: "Crio peças em macramê e cerâmica sob encomenda para presente e decoração.",
         products: [
-          { title: "Chaveiro Personalizado", price: 15.00 },
-          { title: "Vaso Decorativo", price: 45.00 }
+          { title: "Chaveiro Personalizado Macramê", price: 15.00 },
+          { title: "Vaso Decorativo Cerâmica", price: 45.00 }
         ]
       }
     };
@@ -297,7 +399,9 @@
       document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden'));
       const target = document.getElementById('view-' + viewId);
       if (target) target.classList.remove('hidden');
+
       if (viewId === 'explore') renderEntrepreneursList('all');
+      if (viewId === 'dashboard') initChart();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -334,6 +438,7 @@
     function openEntrepreneurProfile(id) {
       const data = entrepreneursData[id];
       if (!data) return;
+      currentVendorPix = data.pixKey;
 
       document.getElementById('profile-header').innerHTML = `
         <div class="flex justify-between items-start">
@@ -357,12 +462,42 @@
             <h4 class="text-xs font-bold text-white">${prod.title}</h4>
             <p class="text-sm font-bold text-emerald-400 mt-1">R$ ${prod.price.toFixed(2)}</p>
           </div>
-          <button onclick="alert('Solicitação enviada no chat ao lado!')" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 text-xs font-bold px-3 py-1.5 rounded-lg">Comprar / Pedir</button>
+          <button onclick="addToCart('${prod.title}', ${prod.price})" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 text-xs font-bold px-3 py-1.5 rounded-lg">+ Carrinho</button>
         `;
         productsContainer.appendChild(div);
       });
 
       switchView('profile');
+    }
+
+    function addToCart(title, price) {
+      cart.push({ title, price });
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      document.getElementById('cart-count').innerText = cart.length;
+      const container = document.getElementById('cart-items');
+      container.innerHTML = '';
+      let total = 0;
+      cart.forEach((item) => {
+        total += item.price;
+        const div = document.createElement('div');
+        div.className = 'flex justify-between items-center bg-slate-900 p-2 rounded text-xs';
+        div.innerHTML = `<span>${item.title}</span><span class="text-emerald-400 font-bold">R$ ${item.price.toFixed(2)}</span>`;
+        container.appendChild(div);
+      });
+      document.getElementById('cart-total').innerText = `R$ ${total.toFixed(2)}`;
+    }
+
+    function toggleCartModal() {
+      document.getElementById('cart-modal').classList.toggle('hidden');
+    }
+
+    function generatePixCheckout() {
+      if (cart.length === 0) return alert('Seu carrinho está vazio.');
+      document.getElementById('pix-key-display').innerText = currentVendorPix;
+      document.getElementById('pix-area').classList.remove('hidden');
     }
 
     function sendMessage(e) {
@@ -392,6 +527,39 @@
       e.preventDefault();
       alert('Perfil publicado com sucesso!');
       switchView('explore');
+    }
+
+    function handleAddProduct(e) {
+      e.preventDefault();
+      const title = document.getElementById('prod-title').value;
+      const price = parseFloat(document.getElementById('prod-price').value);
+      alert(`Produto "${title}" cadastrado no seu catálogo!`);
+      document.getElementById('prod-title').value = '';
+      document.getElementById('prod-price').value = '';
+    }
+
+    let chartInstance = null;
+    function initChart() {
+      const ctx = document.getElementById('accessChart');
+      if (!ctx) return;
+      if (chartInstance) chartInstance.destroy();
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['01/09', '03/09', '05/09', '07/09', '09/09'],
+          datasets: [{
+            label: 'Acessos',
+            data: [120, 240, 310, 180, 398],
+            borderColor: '#34d399',
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } }
+        }
+      });
     }
 
     renderEntrepreneursList();
