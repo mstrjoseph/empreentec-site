@@ -67,16 +67,9 @@
   <!-- ÁREA DE CONTEÚDO PRINCIPAL -->
   <div class="flex-1 flex flex-col min-h-screen relative">
 
-    <!-- CARRINHO FLUTUANTE -->
-    <button onclick="toggleCartModal()" class="fixed bottom-6 right-6 z-40 bg-emerald-400 hover:bg-emerald-300 text-slate-950 p-4 rounded-2xl shadow-xl flex items-center gap-3 transition-all active:scale-95 font-bold text-sm">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
-      <span>Pedidos Abertos</span>
-      <span id="cart-count" class="bg-slate-950 text-emerald-400 text-xs px-2 py-0.5 rounded-full font-black">0</span>
-    </button>
-
     <main class="flex-1 max-w-5xl w-full mx-auto px-8 py-10">
 
-      <!-- VIEW: HOME / PROPOSTA DE VALOR -->
+      <!-- VIEW: HOME -->
       <section id="view-home" class="page-view space-y-12">
         <div class="bg-[#111623] border border-slate-800 p-10 rounded-3xl relative overflow-hidden">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-6">
@@ -121,32 +114,9 @@
               <ul class="text-xs text-slate-300 space-y-2 list-disc list-inside">
                 <li>Ganha um link e página própria: <span class="text-emerald-400 font-mono">empreentec.com/joao-trufas</span></li>
                 <li>Público local descobre seu trabalho e sua história.</li>
-                <li>Mural de oportunidades para fechar negócios e parcerias.</li>
+                <li>Chat direto na plataforma para negociações e entregas.</li>
                 <li>Aproximação via Pulseira NFC no campus.</li>
               </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- CAMADAS DO ECOSSISTEMA -->
-        <div>
-          <h2 class="text-2xl font-bold text-white mb-6">Um ecossistema completo de visibilidade</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl">
-              <span class="text-xs font-bold text-emerald-400">01. Perfil Próprio</span>
-              <p class="text-xs text-slate-400 mt-2">O site que o pequeno vendedor de trufa ou artesanato não teria como construir do zero.</p>
-            </div>
-            <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl">
-              <span class="text-xs font-bold text-emerald-400">02. Descoberta</span>
-              <p class="text-xs text-slate-400 mt-2">Ambiente para o consumidor local descobrir "quem está fazendo o quê" por perto.</p>
-            </div>
-            <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl">
-              <span class="text-xs font-bold text-emerald-400">03. Mural & Match</span>
-              <p class="text-xs text-slate-400 mt-2">Conexão direta entre quem precisa de um serviço (ex: logo ou foto) e quem oferece.</p>
-            </div>
-            <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl">
-              <span class="text-xs font-bold text-emerald-400">04. Analytics & NFC</span>
-              <p class="text-xs text-slate-400 mt-2">Métricas de acesso e aproximação rápida via pulseira para acelerar o contato.</p>
             </div>
           </div>
         </div>
@@ -154,14 +124,25 @@
 
       <!-- VIEW: DESCOBRIR EMPREENDEDORES -->
       <section id="view-explore" class="page-view hidden space-y-6">
-        <div>
-          <h2 class="text-2xl font-bold text-white">Descubra os Empreendedores do Campus</h2>
-          <p class="text-slate-400 text-xs mt-1">Conheça os alunos, artesãos e produtores que movimentam nossa comunidade.</p>
+        <div class="flex justify-between items-center">
+          <div>
+            <h2 class="text-2xl font-bold text-white">Descubra os Empreendedores do Campus</h2>
+            <p class="text-slate-400 text-xs mt-1">Conheça os alunos, artesãos e produtores que movimentam nossa comunidade.</p>
+          </div>
         </div>
+
+        <!-- FILTROS DE CATEGORIA -->
+        <div class="flex gap-2 overflow-x-auto pb-2">
+          <button onclick="filterCategory('all')" class="bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap">Todas</button>
+          <button onclick="filterCategory('Doces')" class="bg-slate-800 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-slate-700">🍬 Doces & Lanches</button>
+          <button onclick="filterCategory('Artesanato')" class="bg-slate-800 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-slate-700">🎨 Artesanato</button>
+          <button onclick="filterCategory('Serviços')" class="bg-slate-800 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-slate-700">💼 Serviços & Mídia</button>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="entrepreneurs-list"></div>
       </section>
 
-      <!-- VIEW: PERFIL DETALHADO (MODELO JOÃO TRUFAS) -->
+      <!-- VIEW: PERFIL DETALHADO + CHAT -->
       <section id="view-profile" class="page-view hidden space-y-6">
         <button onclick="switchView('explore')" class="text-xs font-semibold text-slate-400 hover:text-emerald-400 flex items-center gap-1">
           &larr; Voltar para a vitrine
@@ -169,11 +150,37 @@
         
         <div id="profile-header" class="bg-[#111623] border border-slate-800 p-8 rounded-2xl"></div>
 
-        <h3 class="text-lg font-bold text-white">Produtos & Opções</h3>
-        <div id="profile-products" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="md:col-span-2 space-y-4">
+            <h3 class="text-lg font-bold text-white">Produtos & Opções</h3>
+            <div id="profile-products" class="space-y-3"></div>
+          </div>
+
+          <!-- ÁREA DO CHAT -->
+          <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl flex flex-col justify-between h-[380px]">
+            <div>
+              <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+                <span class="text-xs font-bold text-white flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Chat com Vendedor
+                </span>
+                <span class="text-[10px] text-slate-500">Ao vivo</span>
+              </div>
+              <div id="chat-box" class="space-y-2 text-xs h-[230px] overflow-y-auto pr-1">
+                <div class="bg-slate-800/80 p-2.5 rounded-lg text-slate-300 max-w-[85%]">
+                  Olá! Pode perguntar sobre os sabores ou combinar a entrega no bloco das aulas.
+                </div>
+              </div>
+            </div>
+            <form onsubmit="sendMessage(event)" class="flex gap-2 pt-2 border-t border-slate-800">
+              <input type="text" id="chat-input" placeholder="Digite sua mensagem..." required class="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+              <button type="submit" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 px-3 py-2 rounded-lg font-bold text-xs">&rarr;</button>
+            </form>
+          </div>
+        </div>
       </section>
 
-      <!-- VIEW: MURAL DE OPORTUNIDADES -->
+      <!-- VIEW: MURAL -->
       <section id="view-mural" class="page-view hidden space-y-6">
         <div>
           <h2 class="text-2xl font-bold text-white">Mural de Oportunidades</h2>
@@ -188,14 +195,6 @@
             </div>
             <button onclick="alert('Conexão iniciada com o organizador!')" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs px-4 py-2 rounded-xl">Candidatar-se</button>
           </div>
-          <div class="bg-[#111623] border border-slate-800 p-6 rounded-2xl flex items-center justify-between">
-            <div>
-              <span class="text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-md uppercase">Design & Mídia</span>
-              <h4 class="text-sm font-bold text-white mt-2">Procuro aluno para criar o logotipo e os adesivos da minha marca de salgados</h4>
-              <p class="text-xs text-slate-400 mt-1">Salgados do Bruno • Orçamento a combinar</p>
-            </div>
-            <button onclick="alert('Conexão iniciada!')" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs px-4 py-2 rounded-xl">Propor Serviço</button>
-          </div>
         </div>
       </section>
 
@@ -206,52 +205,33 @@
             <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">CANAL FÍSICO DE DESCOBERTA</span>
             <h2 class="text-3xl font-extrabold text-white">Aproximação que vira venda.</h2>
             <p class="text-slate-300 text-xs leading-relaxed">
-              A pulseira NFC da empreenTEC é a ponte física para o seu perfil digital. Ao expor no campus ou conversar com alguém, o cliente só precisa aproximar o celular para abrir sua vitrine inteira na hora.
+              A pulseira NFC da empreenTEC é a ponte física para o seu perfil digital. O cliente só precisa aproximar o celular para abrir sua vitrine inteira na hora.
             </p>
-            <p class="text-[11px] font-mono text-emerald-400">NFC &rarr; Perfil Profissional &rarr; Produtos &rarr; Contato WhatsApp</p>
-          </div>
-          <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl w-full max-w-xs text-center space-y-3">
-            <div class="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto">
-              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-            </div>
-            <p class="text-xs font-bold text-white">Pulseira do Empreendedor</p>
-            <p class="text-[11px] text-slate-500">Transforme qualquer conversa casual no campus em um novo cliente cadastrado.</p>
           </div>
         </div>
       </section>
 
-      <!-- VIEW: DASHBOARD / ANALYTICS -->
+      <!-- VIEW: DASHBOARD -->
       <section id="view-dashboard" class="page-view hidden space-y-6">
         <div class="flex justify-between items-center border-b border-slate-800 pb-4">
           <div>
             <h2 class="text-2xl font-bold text-white">Analytics do Seu Negócio</h2>
             <p class="text-slate-400 text-xs">Acompanhe quem está descobrindo sua marca dentro da plataforma.</p>
           </div>
-          <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full font-semibold">Página Ativa</span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl">
             <span class="text-slate-400 text-xs font-medium">Acessos à Sua Página</span>
             <p class="text-2xl font-extrabold text-white mt-1">1.248</p>
-            <span class="text-[10px] text-emerald-400 font-bold">+45% fora do seu círculo</span>
           </div>
           <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl">
-            <span class="text-slate-400 text-xs font-medium">Cliques no WhatsApp</span>
-            <p class="text-2xl font-extrabold text-white mt-1">342</p>
-            <span class="text-[10px] text-emerald-400 font-bold">Leads diretos</span>
+            <span class="text-slate-400 text-xs font-medium">Conversas Iniciadas</span>
+            <p class="text-2xl font-extrabold text-emerald-400 mt-1">154</p>
           </div>
           <div class="bg-[#111623] border border-slate-800 p-5 rounded-2xl">
             <span class="text-slate-400 text-xs font-medium">Descobertas via NFC</span>
-            <p class="text-2xl font-extrabold text-emerald-400 mt-1">89</p>
-            <span class="text-[10px] text-emerald-400 font-bold">Presencial no campus</span>
-          </div>
-        </div>
-
-        <div class="bg-[#111623] border border-slate-800 p-6 rounded-2xl">
-          <h3 class="text-sm font-bold text-white mb-4">Origem do Seu Público (Análise de Visibilidade)</h3>
-          <div class="h-48 w-full">
-            <canvas id="accessChart"></canvas>
+            <p class="text-2xl font-extrabold text-white mt-1">89</p>
           </div>
         </div>
       </section>
@@ -271,14 +251,6 @@
             <label class="block text-xs font-semibold text-slate-300 mb-1">Nome do Negócio</label>
             <input type="text" id="reg-business" required placeholder="Ex: Doces do João" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white">
           </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">Sua História / Como Surgiu</label>
-            <textarea id="reg-bio" required rows="2" placeholder="Ex: Comecei a produzir trufas para complementar a renda da faculdade..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white"></textarea>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-300 mb-1">WhatsApp para Contato Direto</label>
-            <input type="tel" id="reg-phone" required placeholder="(48) 99999-8888" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white">
-          </div>
           <button type="submit" class="w-full bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs py-3 rounded-xl transition-all">
             Publicar Minha Página na empreenTEC
           </button>
@@ -289,34 +261,17 @@
 
   </div>
 
-  <!-- MODAL CARRINHO / CONTATO -->
-  <div id="cart-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-[#111623] border border-slate-800 w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
-      <button onclick="toggleCartModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">&times;</button>
-      <h3 class="text-lg font-bold text-white mb-4">Seus Itens Selecionados</h3>
-      <div id="cart-items" class="space-y-3 max-h-60 overflow-y-auto mb-4"></div>
-      <div class="border-t border-slate-800 pt-4 mb-4 flex justify-between items-center text-sm font-semibold">
-        <span>Total:</span>
-        <span id="cart-total" class="text-emerald-400 font-bold text-base">R$ 0,00</span>
-      </div>
-      <button onclick="alert('Pedido enviado diretamente para o WhatsApp do empreendedor!')" class="w-full bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs py-3 rounded-xl">
-        Enviar Pedido no WhatsApp do Empreendedor
-      </button>
-    </div>
-  </div>
-
   <!-- SCRIPT -->
   <script>
-    let cart = [];
-
     const entrepreneursData = {
       joao: {
         id: 'joao',
         name: "João — Estudante de Administração",
         businessName: "Doces do João",
-        city: "Criciúma / Campus SATC",
+        category: "Doces",
+        status: "🟢 No Bloco XXI até 21h",
         link: "empreentec.com/joao-trufas",
-        bio: "Comecei a produzir trufas artesanais para complementar minha renda e pagar os custos do curso. Hoje ofereço opções frescas produzidas diariamente para toda a faculdade.",
+        bio: "Produzo trufas artesanais frescas diariamente para financiar meus estudos no campus.",
         products: [
           { title: "🍫 Trufa de Chocolate Meio Amargo", price: 5.00 },
           { title: "🍓 Trufa de Morango Especial", price: 5.00 },
@@ -325,14 +280,15 @@
       },
       artesanato: {
         id: 'artesanato',
-        name: "Mariana — Feira de Artesanato SATC",
+        name: "Mariana — Artesanato SATC",
         businessName: "Arte em Nós & Peças",
-        city: "Criciúma",
+        category: "Artesanato",
+        status: "🟢 Expondo na Convivência",
         link: "empreentec.com/arte-em-nos",
-        bio: "Crio peças artesanais em macramê e cerâmica personalizadas. Exponho na feira da universidade e atendo encomendas para decoração e presentes.",
+        bio: "Crio peças em macramê e cerâmica sob encomenda para presente e decoração.",
         products: [
-          { title: "Chaveiro Personalizado Macramê", price: 15.00 },
-          { title: "Vaso Decorativo Cerâmica", price: 45.00 }
+          { title: "Chaveiro Personalizado", price: 15.00 },
+          { title: "Vaso Decorativo", price: 45.00 }
         ]
       }
     };
@@ -341,28 +297,34 @@
       document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden'));
       const target = document.getElementById('view-' + viewId);
       if (target) target.classList.remove('hidden');
-
-      if (viewId === 'explore') renderEntrepreneursList();
-      if (viewId === 'dashboard') initChart();
+      if (viewId === 'explore') renderEntrepreneursList('all');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function renderEntrepreneursList() {
+    function filterCategory(cat) {
+      renderEntrepreneursList(cat);
+    }
+
+    function renderEntrepreneursList(filter = 'all') {
       const container = document.getElementById('entrepreneurs-list');
       container.innerHTML = '';
       Object.values(entrepreneursData).forEach(item => {
+        if (filter !== 'all' && item.category !== filter) return;
         const card = document.createElement('div');
         card.onclick = () => openEntrepreneurProfile(item.id);
         card.className = 'bg-[#111623] border border-slate-800 hover:border-emerald-500/50 p-6 rounded-2xl cursor-pointer transition-all flex flex-col justify-between group';
         card.innerHTML = `
           <div>
-            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">${item.link}</span>
-            <h3 class="text-xl font-bold text-white mt-3 mb-1 group-hover:text-emerald-400 transition-colors">${item.businessName}</h3>
-            <p class="text-xs text-slate-400 mb-4 line-clamp-2">${item.bio}</p>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">${item.link}</span>
+              <span class="text-[10px] font-bold text-slate-300 bg-slate-800 px-2 py-0.5 rounded">${item.status}</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mt-2 mb-1 group-hover:text-emerald-400 transition-colors">${item.businessName}</h3>
+            <p class="text-xs text-slate-400 mb-4">${item.bio}</p>
           </div>
           <div class="flex items-center justify-between pt-4 border-t border-slate-800/60 text-xs">
             <span class="text-slate-500">${item.name}</span>
-            <span class="text-emerald-400 font-semibold group-hover:translate-x-1 transition-transform">Ver Página Completa &rarr;</span>
+            <span class="text-emerald-400 font-semibold group-hover:translate-x-1 transition-transform">Ver Perfil &rarr;</span>
           </div>
         `;
         container.appendChild(card);
@@ -374,14 +336,15 @@
       if (!data) return;
 
       document.getElementById('profile-header').innerHTML = `
-        <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20">${data.link}</span>
-        <h2 class="text-3xl font-extrabold text-white mt-4 mb-1">${data.businessName}</h2>
-        <p class="text-xs text-slate-400 mb-4">${data.name} • ${data.city}</p>
-        
-        <div class="border-t border-slate-800/80 pt-4 mt-4 space-y-2">
-          <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Sobre o Empreendedor</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">${data.bio}</p>
+        <div class="flex justify-between items-start">
+          <div>
+            <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20">${data.link}</span>
+            <h2 class="text-3xl font-extrabold text-white mt-3 mb-1">${data.businessName}</h2>
+            <p class="text-xs text-slate-400">${data.name}</p>
+          </div>
+          <button onclick="navigator.clipboard.writeText('${data.link}'); alert('Link do perfil copiado!')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-3 py-1.5 rounded-lg border border-slate-700">📋 Copiar Link</button>
         </div>
+        <p class="text-xs text-slate-300 leading-relaxed mt-4 border-t border-slate-800/80 pt-3">${data.bio}</p>
       `;
 
       const productsContainer = document.getElementById('profile-products');
@@ -394,7 +357,7 @@
             <h4 class="text-xs font-bold text-white">${prod.title}</h4>
             <p class="text-sm font-bold text-emerald-400 mt-1">R$ ${prod.price.toFixed(2)}</p>
           </div>
-          <button onclick="addToCart('${prod.title}', ${prod.price})" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 text-xs font-bold px-3 py-1.5 rounded-lg">+ Pedir</button>
+          <button onclick="alert('Solicitação enviada no chat ao lado!')" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 text-xs font-bold px-3 py-1.5 rounded-lg">Comprar / Pedir</button>
         `;
         productsContainer.appendChild(div);
       });
@@ -402,73 +365,33 @@
       switchView('profile');
     }
 
-    function addToCart(title, price) {
-      cart.push({ title, price });
-      updateCartUI();
-    }
+    function sendMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('chat-input');
+      const box = document.getElementById('chat-box');
+      if (!input.value.trim()) return;
 
-    function updateCartUI() {
-      document.getElementById('cart-count').innerText = cart.length;
-      const container = document.getElementById('cart-items');
-      container.innerHTML = '';
-      let total = 0;
-      cart.forEach((item) => {
-        total += item.price;
-        const div = document.createElement('div');
-        div.className = 'flex justify-between items-center bg-slate-900 p-2 rounded text-xs';
-        div.innerHTML = `<span>${item.title}</span><span class="text-emerald-400 font-bold">R$ ${item.price.toFixed(2)}</span>`;
-        container.appendChild(div);
-      });
-      document.getElementById('cart-total').innerText = `R$ ${total.toFixed(2)}`;
-    }
+      const userMsg = document.createElement('div');
+      userMsg.className = 'bg-emerald-500/20 border border-emerald-500/30 p-2.5 rounded-lg text-emerald-300 max-w-[85%] ml-auto text-right';
+      userMsg.innerText = input.value;
+      box.appendChild(userMsg);
 
-    function toggleCartModal() {
-      document.getElementById('cart-modal').classList.toggle('hidden');
+      setTimeout(() => {
+        const replyMsg = document.createElement('div');
+        replyMsg.className = 'bg-slate-800/80 p-2.5 rounded-lg text-slate-300 max-w-[85%]';
+        replyMsg.innerText = "Combinado! Estou no intervalo das 20h30 perto da cantina.";
+        box.appendChild(replyMsg);
+        box.scrollTop = box.scrollHeight;
+      }, 1000);
+
+      input.value = '';
+      box.scrollTop = box.scrollHeight;
     }
 
     function handleInitialRegister(e) {
       e.preventDefault();
-      const name = document.getElementById('reg-name').value;
-      const business = document.getElementById('reg-business').value;
-      const bio = document.getElementById('reg-bio').value;
-
-      entrepreneursData['novo'] = {
-        id: 'novo',
-        name: name,
-        businessName: business,
-        city: "Campus UNISATC",
-        link: `empreentec.com/${business.toLowerCase().replace(/\s+/g, '-')}`,
-        bio: bio,
-        products: [
-          { title: "Produto Exemplo 1", price: 15.00 }
-        ]
-      };
-
-      alert('Sua página digital foi criada com sucesso!');
+      alert('Perfil publicado com sucesso!');
       switchView('explore');
-    }
-
-    let chartInstance = null;
-    function initChart() {
-      const ctx = document.getElementById('accessChart');
-      if (!ctx) return;
-      if (chartInstance) chartInstance.destroy();
-      chartInstance = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Colegas de Sala', 'Redes Sociais', 'Mural de Vagas', 'Pulseira NFC', 'Busca no Campus'],
-          datasets: [{
-            label: 'Visualizações',
-            data: [120, 240, 310, 180, 398],
-            backgroundColor: '#34d399'
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } }
-        }
-      });
     }
 
     renderEntrepreneursList();
