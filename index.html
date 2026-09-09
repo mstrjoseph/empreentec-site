@@ -11,19 +11,43 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    /* ANIMAÇÃO 1: PULSO DE LUZ NO FUNDO */
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.12; transform: scale(1); }
+      50% { opacity: 0.22; transform: scale(1.1); }
+    }
+
+    /* ANIMAÇÃO 2: FLUTUAÇÃO DA MARCA D'ÁGUA */
+    @keyframes floatWatermark {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-15px) scale(1.02); }
+    }
+
+    .animate-glow-1 {
+      animation: glowPulse 8s ease-in-out infinite;
+    }
+
+    .animate-glow-2 {
+      animation: glowPulse 10s ease-in-out infinite 2s;
+    }
+
+    .animate-watermark {
+      animation: floatWatermark 12s ease-in-out infinite;
+    }
   </style>
 </head>
 <body class="bg-[#070a10] text-slate-100 font-sans antialiased min-h-screen flex selection:bg-emerald-500 selection:text-black relative overflow-x-hidden">
 
-  <!-- ILUMINAÇÃO DE FUNDO E MARCA D'ÁGUA DA EMPREENTEC -->
+  <!-- ILUMINAÇÃO DE FUNDO ANIMADA E MARCA D'ÁGUA DA EMPREENTEC -->
   <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-    <!-- Luz Verde Superior Esquerda -->
-    <div class="absolute -top-40 -left-40 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[140px]"></div>
-    <!-- Luz Teal Inferior Direita -->
-    <div class="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-teal-500/10 rounded-full blur-[140px]"></div>
+    <!-- Luz Verde Superior Esquerda (Pulsante) -->
+    <div class="absolute -top-40 -left-40 w-[650px] h-[650px] bg-emerald-500/20 rounded-full blur-[140px] animate-glow-1"></div>
+    <!-- Luz Teal Inferior Direita (Pulsante) -->
+    <div class="absolute -bottom-40 -right-40 w-[650px] h-[650px] bg-teal-500/20 rounded-full blur-[140px] animate-glow-2"></div>
     
-    <!-- MARCA D'ÁGUA DA LOGO NO PLANO DE FUNDO -->
-    <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] select-none">
+    <!-- MARCA D'ÁGUA DA LOGO ANIMADA NO PLANO DE FUNDO -->
+    <div class="absolute inset-0 flex items-center justify-center opacity-[0.035] select-none animate-watermark">
       <div class="flex items-center gap-6 font-black tracking-tighter text-[15vw]">
         <span class="text-white">empreen</span>
         <span class="text-emerald-400">|</span>
@@ -33,7 +57,7 @@
   </div>
 
   <!-- SIDEBAR LATERAL -->
-  <aside class="w-72 bg-[#111623]/90 backdrop-blur-md border-r border-slate-800 flex flex-col h-screen sticky top-0 z-50 flex-shrink-0">
+  <aside class="w-72 bg-[#111623]/80 backdrop-blur-xl border-r border-slate-800 flex flex-col h-screen sticky top-0 z-50 flex-shrink-0">
     
     <!-- LOGO -->
     <div class="p-6 border-b border-slate-800/60 cursor-pointer" onclick="switchView('home')">
