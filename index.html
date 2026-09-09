@@ -12,81 +12,104 @@
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
 
-    /* ANIMAÇÃO 1: PULSO DE LUZ INTENSO NO FUNDO */
-    @keyframes glowPulse {
-      0%, 100% { opacity: 0.25; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(1.12); }
+    /* ANIMAÇÃO 1: PULSO DE LUZ NEON VERDE MUSGO */
+    @keyframes glowPulseMoss {
+      0%, 100% { opacity: 0.35; transform: scale(1); filter: blur(120px); }
+      50% { opacity: 0.65; transform: scale(1.15); filter: blur(140px); }
     }
 
-    /* ANIMAÇÃO 2: FLUTUAÇÃO SUAVE DA MARCA D'ÁGUA COMPLETA */
-    @keyframes floatWatermark {
-      0%, 100% { transform: translateY(0px) scale(1); }
-      50% { transform: translateY(-12px) scale(1.02); }
+    /* ANIMAÇÃO 2: FLUTUAÇÃO E BRILHO DA MARCA D'ÁGUA */
+    @keyframes watermarkGlow {
+      0%, 100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 15px rgba(74, 222, 128, 0.15)); }
+      50% { transform: translateY(-10px) scale(1.02); filter: drop-shadow(0 0 25px rgba(74, 222, 128, 0.3)); }
     }
 
-    /* ANIMAÇÃO 3: PARTÍCULAS DE LUZ NEON SUBINDO PELA TELA */
+    /* ANIMAÇÃO 3: PARTÍCULAS EM TOM VERDE MUSGO */
     @keyframes particleRise {
-      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-      50% { opacity: 0.8; }
-      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+      0% { transform: translateY(100vh) scale(0.4); opacity: 0; }
+      50% { opacity: 0.9; }
+      100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
     }
 
-    .animate-glow-1 { animation: glowPulse 6s ease-in-out infinite; }
-    .animate-glow-2 { animation: glowPulse 8s ease-in-out infinite 2s; }
-    .animate-watermark { animation: floatWatermark 10s ease-in-out infinite; }
+    .animate-glow-moss-1 { animation: glowPulseMoss 7s ease-in-out infinite; }
+    .animate-glow-moss-2 { animation: glowPulseMoss 9s ease-in-out infinite 2.5s; }
+    .animate-watermark-moss { animation: watermarkGlow 8s ease-in-out infinite; }
 
-    .particle {
+    .particle-moss {
       position: absolute;
       border-radius: 50%;
-      background: rgba(52, 211, 153, 0.6);
-      box-shadow: 0 0 12px rgba(52, 211, 153, 0.8);
+      background: rgba(74, 222, 128, 0.7);
+      box-shadow: 0 0 10px rgba(74, 222, 128, 0.8);
       animation: particleRise linear infinite;
     }
   </style>
 </head>
-<body class="bg-[#05080e] text-slate-100 font-sans antialiased min-h-screen flex selection:bg-emerald-500 selection:text-black relative overflow-x-hidden">
+<body class="bg-[#030705] text-slate-100 font-sans antialiased min-h-screen flex flex-col md:flex-row selection:bg-emerald-500 selection:text-black relative overflow-x-hidden">
 
-  <!-- BACKGROUND ANIMADO DINÂMICO: MARCA COMPLETA + FEIXES DE LUZ + PARTÍCULAS -->
+  <!-- BACKGROUND ANIMADO INTERATIVO VERDE MUSGO -->
   <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <!-- Luzes Neon em Verde Musgo Profundo -->
+    <div class="absolute -top-32 -left-32 w-[700px] h-[700px] bg-[#1b4329]/50 rounded-full blur-[120px] animate-glow-moss-1"></div>
+    <div class="absolute -bottom-32 -right-32 w-[700px] h-[700px] bg-[#0d2a18]/60 rounded-full blur-[120px] animate-glow-moss-2"></div>
     
-    <!-- LUZES NEON DE FUNDO -->
-    <div class="absolute -top-32 -left-32 w-[700px] h-[700px] bg-emerald-500/25 rounded-full blur-[130px] animate-glow-1"></div>
-    <div class="absolute -bottom-32 -right-32 w-[700px] h-[700px] bg-teal-500/25 rounded-full blur-[130px] animate-glow-2"></div>
-    
-    <!-- PARTÍCULAS FLUTUANTES PELA TELA -->
-    <div class="particle w-2 h-2 left-[10%] duration-[9s] delay-[0s]"></div>
-    <div class="particle w-3 h-3 left-[25%] duration-[12s] delay-[2s]"></div>
-    <div class="particle w-1.5 h-1.5 left-[45%] duration-[8s] delay-[4s]"></div>
-    <div class="particle w-2.5 h-2.5 left-[70%] duration-[11s] delay-[1s]"></div>
-    <div class="particle w-2 h-2 left-[88%] duration-[10s] delay-[3s]"></div>
+    <!-- Partículas Flutuantes -->
+    <div class="particle-moss w-2 h-2 left-[12%] duration-[9s] delay-[0s]"></div>
+    <div class="particle-moss w-3 h-3 left-[28%] duration-[12s] delay-[2s]"></div>
+    <div class="particle-moss w-1.5 h-1.5 left-[50%] duration-[8s] delay-[4s]"></div>
+    <div class="particle-moss w-2.5 h-2.5 left-[75%] duration-[11s] delay-[1s]"></div>
+    <div class="particle-moss w-2 h-2 left-[90%] duration-[10s] delay-[3s]"></div>
 
-    <!-- MARCA D'ÁGUA COMPLETA (LOGO COM ÍCONE + NOME EM TONALIDADE MAIS INTENSA) -->
-    <div class="absolute inset-0 flex items-center justify-center opacity-[0.07] select-none animate-watermark px-4">
-      <div class="flex items-center gap-6">
-        <!-- ÍCONE GRÁFICO DA LOGO COM SETA -->
-        <svg class="w-[12vw] h-[12vw] text-emerald-400 flex-shrink-0" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- LOGO DE FUNDO RESSALTADA (MARCA D'ÁGUA DESTACADA COM BRILHO) -->
+    <div class="absolute inset-0 flex items-center justify-center opacity-[0.14] select-none animate-watermark-moss px-4">
+      <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+        <svg class="w-[20vw] md:w-[12vw] h-[20vw] md:h-[12vw] text-[#4ade80] flex-shrink-0 drop-shadow-[0_0_20px_rgba(74,222,128,0.4)]" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M4 26V20C4 18.8954 4.89543 18 6 18V18C7.10457 18 8 18.8954 8 20V26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M12 26V14C12 12.8954 12.8954 12 14 12V12C15.1046 12 16 12.8954 16 14V26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M20 26V17C20 15.8954 20.8954 15 22 15V15C23.1046 15 24 15.8954 24 17V26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M6 16L15 7L19 11L26 4M26 4H21M26 4V9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <!-- TEXTO DA LOGO -->
-        <div class="flex items-baseline tracking-tight font-black text-[13vw]">
+        <div class="flex items-baseline tracking-tight font-black text-[15vw] md:text-[12vw]">
           <span class="text-white">empreen</span>
-          <span class="text-emerald-400 mx-2 font-extralight">|</span>
-          <span class="text-emerald-400 tracking-wider">TEC</span>
+          <span class="text-[#4ade80] mx-2 font-extralight">|</span>
+          <span class="text-[#4ade80] tracking-wider">TEC</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SIDEBAR LATERAL -->
-  <aside class="w-72 bg-[#0c101a]/85 backdrop-blur-xl border-r border-slate-800/80 flex flex-col h-screen sticky top-0 z-50 flex-shrink-0">
+  <!-- HEADER MOBILE (VISÍVEL APENAS EM CELULARES) -->
+  <header class="md:hidden bg-[#0a140d]/90 backdrop-blur-xl border-b border-emerald-900/40 p-4 sticky top-0 z-50 flex items-center justify-between">
+    <div class="flex items-center gap-2 cursor-pointer" onclick="switchView('home')">
+      <svg class="w-6 h-6 text-[#4ade80]" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 26V20C4 18.8954 4.89543 18 6 18V18C7.10457 18 8 18.8954 8 20V26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M12 26V14C12 12.8954 12.8954 12 14 12V12C15.1046 12 16 12.8954 16 14V26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M20 26V17C20 15.8954 20.8954 15 22 15V15C23.1046 15 24 15.8954 24 17V26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M6 16L15 7L19 11L26 4M26 4H21M26 4V9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="font-bold text-lg text-white">empreen<span class="text-[#4ade80]">|TEC</span></span>
+    </div>
+    <button onclick="toggleMobileMenu()" class="text-slate-300 p-2 focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </header>
+
+  <!-- MENU DROPDOWN MOBILE (EXPANSÍVEL NO CELULAR) -->
+  <div id="mobile-menu" class="hidden md:hidden bg-[#0e1f13]/95 backdrop-blur-xl border-b border-emerald-900/60 p-4 space-y-2 sticky top-[60px] z-40">
+    <button onclick="switchView('home'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-[#4ade80] bg-emerald-950/40 border border-emerald-800/40">Nossa Proposta de Valor</button>
+    <button onclick="switchView('explore'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-emerald-950/30">Descobrir Empreendedores</button>
+    <button onclick="switchView('mural'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-emerald-950/30">Mural de Oportunidades</button>
+    <button onclick="switchView('nfc'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-emerald-950/30">Pulseira NFC</button>
+    <button onclick="switchView('dashboard'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-emerald-950/30">Dashboard do Vendedor</button>
+    <button onclick="switchView('register-entrepreneur'); toggleMobileMenu();" class="w-full bg-[#2e7d4e] text-white font-bold text-xs py-2.5 rounded-lg mt-2">Criar Presença Digital</button>
+  </div>
+
+  <!-- SIDEBAR LATERAL EM VERDE MUSGO (VISÍVEL NO DESKTOP) -->
+  <aside class="hidden md:flex w-72 bg-[#0e1f13]/90 backdrop-blur-xl border-r border-emerald-900/50 flex-col h-screen sticky top-0 z-50 flex-shrink-0">
     
-    <!-- LOGO HEADER -->
-    <div class="p-6 border-b border-slate-800/60 cursor-pointer" onclick="switchView('home')">
+    <!-- LOGO HEADER DESKTOP -->
+    <div class="p-6 border-b border-emerald-900/40 cursor-pointer" onclick="switchView('home')">
       <div class="flex items-center gap-3">
-        <svg class="w-8 h-8 text-emerald-400 flex-shrink-0" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="w-8 h-8 text-[#4ade80] flex-shrink-0 drop-shadow-[0_0_10px_rgba(74,222,128,0.5)]" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M4 26V20C4 18.8954 4.89543 18 6 18V18C7.10457 18 8 18.8954 8 20V26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M12 26V14C12 12.8954 12.8954 12 14 12V12C15.1046 12 16 12.8954 16 14V26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M20 26V17C20 15.8954 20.8954 15 22 15V15C23.1046 15 24 15.8954 24 17V26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
@@ -94,36 +117,36 @@
         </svg>
         <div class="flex items-baseline tracking-tight">
           <span class="text-2xl font-bold text-white tracking-tighter">empreen</span>
-          <span class="text-2xl font-extralight text-emerald-400 mx-0.5">|</span>
-          <span class="text-2xl font-black text-emerald-400 tracking-wider">TEC</span>
+          <span class="text-2xl font-extralight text-[#4ade80] mx-0.5">|</span>
+          <span class="text-2xl font-black text-[#4ade80] tracking-wider">TEC</span>
         </div>
       </div>
-      <p class="text-[10px] text-slate-400 tracking-widest font-semibold uppercase mt-2">Plataforma de Visibilidade Acadêmica</p>
+      <p class="text-[10px] text-emerald-300/70 tracking-widest font-semibold uppercase mt-2">Plataforma de Visibilidade Acadêmica</p>
     </div>
 
-    <!-- NAVEGAÇÃO -->
+    <!-- NAVEGAÇÃO DESKTOP -->
     <div class="p-4 flex-1 overflow-y-auto space-y-1.5 z-10">
-      <button onclick="switchView('home')" id="nav-home" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 transition-all">
+      <button onclick="switchView('home')" id="nav-home" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#4ade80] bg-emerald-950/60 border border-emerald-800/50 transition-all">
         Nossa Proposta de Valor
       </button>
-      <button onclick="switchView('explore')" id="nav-explore" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
+      <button onclick="switchView('explore')" id="nav-explore" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-emerald-300 hover:bg-emerald-950/40 transition-all">
         Descobrir Empreendedores
       </button>
-      <button onclick="switchView('mural')" id="nav-mural" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
+      <button onclick="switchView('mural')" id="nav-mural" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-emerald-300 hover:bg-emerald-950/40 transition-all">
         Mural de Oportunidades
       </button>
-      <button onclick="switchView('nfc')" id="nav-nfc" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all flex items-center justify-between">
+      <button onclick="switchView('nfc')" id="nav-nfc" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-emerald-300 hover:bg-emerald-950/40 transition-all flex items-center justify-between">
         <span>Pulseira NFC</span>
-        <span class="text-[9px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded font-bold">TAG</span>
+        <span class="text-[9px] bg-emerald-900/60 text-[#4ade80] px-1.5 py-0.5 rounded font-bold border border-emerald-700/40">TAG</span>
       </button>
-      <button onclick="switchView('dashboard')" id="nav-dashboard" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
+      <button onclick="switchView('dashboard')" id="nav-dashboard" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-emerald-300 hover:bg-emerald-950/40 transition-all">
         Dashboard do Vendedor
       </button>
     </div>
 
-    <!-- BOTÃO DE AÇÃO -->
-    <div class="p-4 border-t border-slate-800 z-10">
-      <button onclick="switchView('register-entrepreneur')" class="w-full bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs py-2.5 px-4 rounded-xl transition-all shadow-lg shadow-emerald-950/20">
+    <!-- BOTÃO DE AÇÃO NO DESKTOP -->
+    <div class="p-4 border-t border-emerald-900/40 z-10">
+      <button onclick="switchView('register-entrepreneur')" class="w-full bg-[#2e7d4e] hover:bg-[#38965e] text-white font-bold text-xs py-2.5 px-4 rounded-xl transition-all shadow-lg shadow-emerald-950/40 border border-emerald-600/30">
         Criar Minha Presença Digital
       </button>
     </div>
@@ -132,32 +155,32 @@
   <!-- ÁREA DE CONTEÚDO PRINCIPAL -->
   <div class="flex-1 flex flex-col min-h-screen relative z-10">
 
-    <!-- BOTÃO FLUTUANTE DO CARRINHO -->
-    <button onclick="toggleCartModal()" class="fixed bottom-6 right-6 z-40 bg-emerald-400 hover:bg-emerald-300 text-slate-950 p-4 rounded-2xl shadow-xl flex items-center gap-3 transition-all active:scale-95 font-bold text-sm">
+    <!-- BOTÃO FLUTUANTE DO CARRINHO (RESPONSIVO PARA CELULAR E PC) -->
+    <button onclick="toggleCartModal()" class="fixed bottom-6 right-6 z-40 bg-[#4ade80] hover:bg-[#3cd072] text-slate-950 p-3.5 md:p-4 rounded-2xl shadow-2xl flex items-center gap-2.5 md:gap-3 transition-all active:scale-95 font-bold text-xs md:text-sm border border-emerald-300/40">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
       <span>Carrinho / Pedidos</span>
-      <span id="cart-count" class="bg-slate-950 text-emerald-400 text-xs px-2 py-0.5 rounded-full font-black">0</span>
+      <span id="cart-count" class="bg-slate-950 text-[#4ade80] text-xs px-2 py-0.5 rounded-full font-black">0</span>
     </button>
 
-    <main class="flex-1 max-w-5xl w-full mx-auto px-8 py-10">
+    <main class="flex-1 max-w-5xl w-full mx-auto px-4 md:px-8 py-6 md:py-10">
 
       <!-- VIEW: HOME / PROPOSTA DE VALOR -->
-      <section id="view-home" class="page-view space-y-12">
-        <div class="bg-[#0e1320]/80 backdrop-blur-md border border-slate-800/80 p-10 rounded-3xl relative overflow-hidden shadow-2xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-6">
+      <section id="view-home" class="page-view space-y-8 md:space-y-12">
+        <div class="bg-[#0b180f]/80 backdrop-blur-md border border-emerald-900/50 p-6 md:p-10 rounded-3xl relative overflow-hidden shadow-2xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-700/40 text-[#4ade80] text-xs font-semibold mb-4 md:mb-6">
             Visibilidade para quem empreende na faculdade
           </div>
-          <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4 leading-tight max-w-3xl">
+          <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4 leading-tight max-w-3xl">
             Seu negócio merece ser encontrado além do seu círculo.
           </h1>
-          <p class="text-slate-300 text-base max-w-2xl mb-8 leading-relaxed">
+          <p class="text-slate-300 text-sm md:text-base max-w-2xl mb-6 md:mb-8 leading-relaxed">
             A empreenTEC dá ao microempreendedor uma presença digital profissional sem a complexidade de criar um site próprio, conectando seu talento a pessoas, parceiros e oportunidades em todo o campus.
           </p>
-          <div class="flex items-center gap-4">
-            <button onclick="switchView('register-entrepreneur')" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold px-6 py-3 rounded-xl transition-all text-xs">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 md:gap-4">
+            <button onclick="switchView('register-entrepreneur')" class="bg-[#2e7d4e] hover:bg-[#38965e] text-white font-bold px-6 py-3 rounded-xl transition-all text-xs text-center border border-emerald-500/30">
               Criar Página do Meu Negócio &rarr;
             </button>
-            <button onclick="switchView('explore')" class="bg-slate-800/80 hover:bg-slate-700 text-white font-semibold px-6 py-3 rounded-xl transition-all text-xs border border-slate-700">
+            <button onclick="switchView('explore')" class="bg-emerald-950/40 hover:bg-emerald-900/40 text-slate-200 font-semibold px-6 py-3 rounded-xl transition-all text-xs border border-emerald-900/60 text-center">
               Descobrir Quem Empreende
             </button>
           </div>
@@ -165,12 +188,12 @@
 
         <!-- COMPARATIVO: SEM VS COM EMPREENTEC -->
         <div>
-          <h2 class="text-2xl font-bold text-white mb-2">Por que a empreenTEC existe?</h2>
+          <h2 class="text-xl md:text-2xl font-bold text-white mb-2">Por que a empreenTEC existe?</h2>
           <p class="text-slate-400 text-xs mb-6">A diferença entre vender só para amigos e ser descoberto por toda a comunidade.</p>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-slate-900/50 border border-red-500/20 p-6 rounded-2xl space-y-3">
-              <span class="text-xs font-bold bg-red-500/10 text-red-400 px-2.5 py-1 rounded uppercase">Sem a empreenTEC</span>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <div class="bg-slate-950/60 border border-red-500/20 p-5 md:p-6 rounded-2xl space-y-3">
+              <span class="text-xs font-bold bg-red-950/60 text-red-400 border border-red-800/40 px-2.5 py-1 rounded uppercase">Sem a empreenTEC</span>
               <p class="text-sm font-bold text-white">Limitado ao Círculo Pessoal</p>
               <ul class="text-xs text-slate-400 space-y-2 list-disc list-inside">
                 <li>Vende apenas para colegas de sala e conhecidos.</li>
@@ -180,11 +203,11 @@
               </ul>
             </div>
 
-            <div class="bg-[#0e1320]/80 border border-emerald-500/30 p-6 rounded-2xl space-y-3">
-              <span class="text-xs font-bold bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded uppercase">Com a empreenTEC</span>
+            <div class="bg-[#0b180f]/80 border border-emerald-700/40 p-5 md:p-6 rounded-2xl space-y-3">
+              <span class="text-xs font-bold bg-emerald-950/80 text-[#4ade80] border border-emerald-700/50 px-2.5 py-1 rounded uppercase">Com a empreenTEC</span>
               <p class="text-sm font-bold text-white">Presença Digital Profissional</p>
               <ul class="text-xs text-slate-300 space-y-2 list-disc list-inside">
-                <li>Ganha um link e página própria: <span class="text-emerald-400 font-mono">empreentec.com/joao-trufas</span></li>
+                <li>Ganha um link e página própria: <span class="text-[#4ade80] font-mono">empreentec.com/joao-trufas</span></li>
                 <li>Público local descobre seu trabalho e sua história.</li>
                 <li>Chat ao vivo + Checkout PIX para fechar vendas no campus.</li>
                 <li>Aproximação via Pulseira NFC no campus.</li>
@@ -195,22 +218,22 @@
 
         <!-- ECOSSISTEMA -->
         <div>
-          <h2 class="text-2xl font-bold text-white mb-6">Um ecossistema completo de visibilidade</h2>
+          <h2 class="text-xl md:text-2xl font-bold text-white mb-6">Um ecossistema completo de visibilidade</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="bg-[#0e1320]/80 border border-slate-800/80 p-5 rounded-2xl">
-              <span class="text-xs font-bold text-emerald-400">01. Perfil Próprio</span>
+            <div class="bg-[#0b180f]/80 border border-emerald-900/40 p-5 rounded-2xl">
+              <span class="text-xs font-bold text-[#4ade80]">01. Perfil Próprio</span>
               <p class="text-xs text-slate-400 mt-2">O site que o pequeno vendedor de trufa ou artesanato não teria como construir do zero.</p>
             </div>
-            <div class="bg-[#0e1320]/80 border border-slate-800/80 p-5 rounded-2xl">
-              <span class="text-xs font-bold text-emerald-400">02. Descoberta</span>
+            <div class="bg-[#0b180f]/80 border border-emerald-900/40 p-5 rounded-2xl">
+              <span class="text-xs font-bold text-[#4ade80]">02. Descoberta</span>
               <p class="text-xs text-slate-400 mt-2">Ambiente para o consumidor local descobrir "quem está fazendo o quê" por perto.</p>
             </div>
-            <div class="bg-[#0e1320]/80 border border-slate-800/80 p-5 rounded-2xl">
-              <span class="text-xs font-bold text-emerald-400">03. Mural & Match</span>
+            <div class="bg-[#0b180f]/80 border border-emerald-900/40 p-5 rounded-2xl">
+              <span class="text-xs font-bold text-[#4ade80]">03. Mural & Match</span>
               <p class="text-xs text-slate-400 mt-2">Conexão direta entre quem precisa de um serviço e quem oferece.</p>
             </div>
-            <div class="bg-[#0e1320]/80 border border-slate-800/80 p-5 rounded-2xl">
-              <span class="text-xs font-bold text-emerald-400">04. Analytics & NFC</span>
+            <div class="bg-[#0b180f]/80 border border-emerald-900/40 p-5 rounded-2xl">
+              <span class="text-xs font-bold text-[#4ade80]">04. Analytics & NFC</span>
               <p class="text-xs text-slate-400 mt-2">Métricas de acesso e aproximação rápida via pulseira para acelerar o contato.</p>
             </div>
           </div>
@@ -224,24 +247,24 @@
           <p class="text-slate-400 text-xs mt-1">Conheça os alunos, artesãos e produtores que movimentam nossa comunidade.</p>
         </div>
 
-        <!-- FILTROS DE CATEGORIA -->
-        <div class="flex gap-2 overflow-x-auto pb-2">
-          <button onclick="filterCategory('all')" class="bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap">Todas</button>
-          <button onclick="filterCategory('Doces')" class="bg-slate-800 border border-slate-700 text-slate-300 px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-slate-700">🍬 Doces & Lanches</button>
-          <button onclick="filterCategory('Artesanato')" class="bg-slate-800 border border-slate-700 text-slate-300 px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-slate-700">🎨 Artesanato</button>
-          <button onclick="filterCategory('Serviços')" class="bg-slate-800 border border-slate-700 text-slate-300 px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-slate-700">💼 Serviços & Mídia</button>
+        <!-- FILTROS DE CATEGORIA RESPONSIVOS -->
+        <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
+          <button onclick="filterCategory('all')" class="bg-emerald-950/80 border border-emerald-700/50 text-[#4ade80] px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap">Todas</button>
+          <button onclick="filterCategory('Doces')" class="bg-emerald-950/30 border border-emerald-900/40 text-slate-300 px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-emerald-900/40">🍬 Doces & Lanches</button>
+          <button onclick="filterCategory('Artesanato')" class="bg-emerald-950/30 border border-emerald-900/40 text-slate-300 px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-emerald-900/40">🎨 Artesanato</button>
+          <button onclick="filterCategory('Serviços')" class="bg-emerald-950/30 border border-emerald-900/40 text-slate-300 px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap hover:bg-emerald-900/40">💼 Serviços & Mídia</button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="entrepreneurs-list"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5" id="entrepreneurs-list"></div>
       </section>
 
       <!-- VIEW: PERFIL DETALHADO + CHAT -->
       <section id="view-profile" class="page-view hidden space-y-6">
-        <button onclick="switchView('explore')" class="text-xs font-semibold text-slate-400 hover:text-emerald-400 flex items-center gap-1">
+        <button onclick="switchView('explore')" class="text-xs font-semibold text-slate-400 hover:text-[#4ade80] flex items-center gap-1">
           &larr; Voltar para a vitrine
         </button>
         
-        <div id="profile-header" class="bg-[#0e1320]/80 border border-slate-800/80 p-8 rounded-2xl"></div>
+        <div id="profile-header" class="bg-[#0b180f]/80 border border-emerald-900/50 p-6 md:p-8 rounded-2xl"></div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="md:col-span-2 space-y-4">
@@ -249,25 +272,25 @@
             <div id="profile-products" class="space-y-3"></div>
           </div>
 
-          <!-- ÁREA DO CHAT AO VIVO -->
-          <div class="bg-[#0e1320]/80 border border-slate-800/80 p-5 rounded-2xl flex flex-col justify-between h-[380px]">
+          <!-- ÁREA DO CHAT AO VIVO NO VERDE MUSGO -->
+          <div class="bg-[#0b180f]/80 border border-emerald-900/50 p-5 rounded-2xl flex flex-col justify-between h-[380px]">
             <div>
-              <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+              <div class="flex items-center justify-between border-b border-emerald-900/40 pb-3 mb-3">
                 <span class="text-xs font-bold text-white flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span class="w-2 h-2 rounded-full bg-[#4ade80] animate-pulse"></span>
                   Chat com Vendedor
                 </span>
                 <span class="text-[10px] text-slate-500">Ao vivo</span>
               </div>
               <div id="chat-box" class="space-y-2 text-xs h-[230px] overflow-y-auto pr-1">
-                <div class="bg-slate-800/80 p-2.5 rounded-lg text-slate-300 max-w-[85%]">
+                <div class="bg-emerald-950/40 p-2.5 rounded-lg text-slate-300 max-w-[85%] border border-emerald-900/30">
                   Olá! Pode perguntar sobre os sabores ou combinar a entrega no bloco das aulas.
                 </div>
               </div>
             </div>
-            <form onsubmit="sendMessage(event)" class="flex gap-2 pt-2 border-t border-slate-800">
-              <input type="text" id="chat-input" placeholder="Digite sua mensagem..." required class="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500">
-              <button type="submit" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 px-3 py-2 rounded-lg font-bold text-xs">&rarr;</button>
+            <form onsubmit="sendMessage(event)" class="flex gap-2 pt-2 border-t border-emerald-900/40">
+              <input type="text" id="chat-input" placeholder="Digite sua mensagem..." required class="flex-1 bg-slate-900/90 border border-emerald-900/50 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-[#4ade80]">
+              <button type="submit" class="bg-[#4ade80] hover:bg-[#3cd072] text-slate-950 px-3 py-2 rounded-lg font-bold text-xs">&rarr;</button>
             </form>
           </div>
         </div>
@@ -280,77 +303,77 @@
           <p class="text-slate-400 text-xs mt-1">Veja quem está procurando produtos ou serviços no campus e ofereça sua solução.</p>
         </div>
         <div class="space-y-4">
-          <div class="bg-[#0e1320]/80 border border-slate-800/80 p-6 rounded-2xl flex items-center justify-between">
+          <div class="bg-[#0b180f]/80 border border-emerald-900/50 p-5 md:p-6 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <span class="text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-md uppercase">Alimentação & Eventos</span>
+              <span class="text-[10px] font-bold bg-emerald-950/60 text-[#4ade80] border border-emerald-800/40 px-2.5 py-1 rounded-md uppercase">Alimentação & Eventos</span>
               <h4 class="text-sm font-bold text-white mt-2">Preciso de 30 doces gourmet para recepção de evento acadêmico</h4>
               <p class="text-xs text-slate-400 mt-1">Centro Acadêmico de ADM • Orçamento estimado: R$ 180,00</p>
             </div>
-            <button onclick="alert('Conexão iniciada com o organizador!')" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs px-4 py-2 rounded-xl">Candidatar-se</button>
+            <button onclick="alert('Conexão iniciada com o organizador!')" class="bg-[#4ade80] hover:bg-[#3cd072] text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl w-full sm:w-auto">Candidatar-se</button>
           </div>
-          <div class="bg-[#0e1320]/80 border border-slate-800/80 p-6 rounded-2xl flex items-center justify-between">
+          <div class="bg-[#0b180f]/80 border border-emerald-900/50 p-5 md:p-6 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <span class="text-[10px] font-bold bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-md uppercase">Design & Mídia</span>
+              <span class="text-[10px] font-bold bg-emerald-950/60 text-[#4ade80] border border-emerald-800/40 px-2.5 py-1 rounded-md uppercase">Design & Mídia</span>
               <h4 class="text-sm font-bold text-white mt-2">Procuro gráfica para impressão de crachás e banners</h4>
               <p class="text-xs text-slate-400 mt-1">Aceleradora ITA Ventures • Orçamento: R$ 500,00</p>
             </div>
-            <button onclick="alert('Conexão iniciada!')" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs px-4 py-2 rounded-xl">Propor Serviço</button>
+            <button onclick="alert('Conexão iniciada!')" class="bg-[#4ade80] hover:bg-[#3cd072] text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl w-full sm:w-auto">Propor Serviço</button>
           </div>
         </div>
       </section>
 
       <!-- VIEW: PULSEIRA NFC -->
       <section id="view-nfc" class="page-view hidden space-y-6">
-        <div class="bg-[#0e1320]/80 border border-slate-800/80 p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="bg-[#0b180f]/80 border border-emerald-900/50 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8">
           <div class="space-y-4 max-w-md">
-            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">CANAL FÍSICO DE DESCOBERTA</span>
-            <h2 class="text-3xl font-extrabold text-white">Sua ideia mais perto do mundo.</h2>
+            <span class="text-xs font-bold text-[#4ade80] uppercase tracking-wider">CANAL FÍSICO DE DESCOBERTA</span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-white">Sua ideia mais perto do mundo.</h2>
             <p class="text-slate-300 text-xs leading-relaxed">
               Com a tecnologia NFC, o cliente aproxima o celular da sua pulseira EmpreenTEC e é direcionado automaticamente para o seu perfil e vitrine dentro do campus.
             </p>
-            <p class="text-[11px] font-mono text-emerald-400">NFC &rarr; Perfil Profissional &rarr; Produtos &rarr; Contato / Chat</p>
+            <p class="text-[11px] font-mono text-[#4ade80]">NFC &rarr; Perfil Profissional &rarr; Produtos &rarr; Contato / Chat</p>
           </div>
-          <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl w-full max-w-xs text-center space-y-3">
-            <div class="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto">
+          <div class="bg-emerald-950/40 border border-emerald-900/60 p-6 rounded-2xl w-full max-w-xs text-center space-y-3">
+            <div class="w-16 h-16 rounded-full bg-emerald-900/60 text-[#4ade80] flex items-center justify-center mx-auto border border-emerald-700/40">
               <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
             </div>
             <p class="text-xs font-bold text-white">Aproximação Instantânea</p>
-            <p class="text-[11px] text-slate-500">Transforme conversas no campus em vendas diretas sem precisar passar redes sociais.</p>
+            <p class="text-[11px] text-slate-400">Transforme conversas no campus em vendas diretas sem precisar passar redes sociais.</p>
           </div>
         </div>
       </section>
 
       <!-- VIEW: DASHBOARD COMPLETO COM ORIGEM E MAPA -->
       <section id="view-dashboard" class="page-view hidden space-y-6">
-        <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+        <div class="flex justify-between items-center border-b border-emerald-900/40 pb-4">
           <div>
             <h2 class="text-2xl font-bold text-white">Dashboard do Vendedor</h2>
             <p class="text-slate-400 text-xs">Acompanhe seus acessos e o alcance do seu negócio além do seu círculo.</p>
           </div>
-          <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full font-semibold">Perfil Ativo</span>
+          <span class="text-xs bg-emerald-950/80 text-[#4ade80] border border-emerald-800/50 px-3 py-1 rounded-full font-semibold">Perfil Ativo</span>
         </div>
 
         <!-- METRICAS DE DESEMPENHO -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div class="bg-[#0e1320]/80 border border-slate-800/80 p-5 rounded-2xl">
+          <div class="bg-[#0b180f]/80 border border-emerald-900/50 p-5 rounded-2xl">
             <span class="text-slate-400 text-xs font-medium">Acessos à Sua Página</span>
             <p class="text-2xl font-extrabold text-white mt-1">1.248</p>
-            <span class="text-[10px] text-emerald-400 font-bold">+45% fora do seu círculo</span>
+            <span class="text-[10px] text-[#4ade80] font-bold">+45% fora do seu círculo</span>
           </div>
-          <div class="bg-[#0e1320]/80 border border-slate-800/80 p-5 rounded-2xl">
+          <div class="bg-[#0b180f]/80 border border-emerald-900/50 p-5 rounded-2xl">
             <span class="text-slate-400 text-xs font-medium">Contatos no Chat</span>
-            <p class="text-2xl font-extrabold text-emerald-400 mt-1">342</p>
-            <span class="text-[10px] text-emerald-400 font-bold">+16% este mês</span>
+            <p class="text-2xl font-extrabold text-[#4ade80] mt-1">342</p>
+            <span class="text-[10px] text-[#4ade80] font-bold">+16% este mês</span>
           </div>
-          <div class="bg-[#0e1320]/80 border border-slate-800/80 p-5 rounded-2xl">
+          <div class="bg-[#0b180f]/80 border border-emerald-900/50 p-5 rounded-2xl">
             <span class="text-slate-400 text-xs font-medium">Vendas Realizadas (PIX)</span>
             <p class="text-2xl font-extrabold text-white mt-1">46</p>
-            <span class="text-[10px] text-emerald-400 font-bold">R$ 575,00 acumulados</span>
+            <span class="text-[10px] text-[#4ade80] font-bold">R$ 575,00 acumulados</span>
           </div>
         </div>
 
         <!-- LINHA DO TEMPO DE ACESSOS -->
-        <div class="bg-[#0e1320]/80 border border-slate-800/80 p-6 rounded-2xl">
+        <div class="bg-[#0b180f]/80 border border-emerald-900/50 p-6 rounded-2xl">
           <h3 class="text-sm font-bold text-white mb-4">Evolução de Acessos ao Perfil</h3>
           <div class="h-48 w-full">
             <canvas id="accessChart"></canvas>
@@ -361,7 +384,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           
           <!-- ORIGEM DOS ACESSOS -->
-          <div class="bg-[#0e1320]/80 border border-slate-800/80 p-6 rounded-2xl flex flex-col justify-between">
+          <div class="bg-[#0b180f]/80 border border-emerald-900/50 p-6 rounded-2xl flex flex-col justify-between">
             <div>
               <h3 class="text-sm font-bold text-white mb-1">Origem dos Acessos</h3>
               <p class="text-xs text-slate-400 mb-4">De onde seus clientes estão vindo</p>
@@ -369,41 +392,41 @@
                 <canvas id="originChart"></canvas>
               </div>
             </div>
-            <div class="grid grid-cols-2 gap-2 pt-4 border-t border-slate-800/80 text-[11px] text-slate-300 mt-2">
-              <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> NFC (pulseira): 42%</div>
-              <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-teal-400"></span> Link direto: 28%</div>
-              <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> Busca no app: 18%</div>
+            <div class="grid grid-cols-2 gap-2 pt-4 border-t border-emerald-900/40 text-[11px] text-slate-300 mt-2">
+              <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#4ade80]"></span> NFC (pulseira): 42%</div>
+              <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#2e7d4e]"></span> Link direto: 28%</div>
+              <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#1b4329]"></span> Busca no app: 18%</div>
               <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-slate-600"></span> Redes sociais: 8%</div>
             </div>
           </div>
 
           <!-- LOCAIS COM MAIS ACESSOS -->
-          <div class="bg-[#0e1320]/80 border border-slate-800/80 p-6 rounded-2xl flex flex-col justify-between">
+          <div class="bg-[#0b180f]/80 border border-emerald-900/50 p-6 rounded-2xl flex flex-col justify-between">
             <div>
               <div class="flex justify-between items-center mb-4">
                 <h3 class="text-sm font-bold text-white">Locais com Mais Acessos</h3>
-                <span class="text-[10px] bg-slate-800 text-emerald-400 px-2 py-0.5 rounded font-mono">Região</span>
+                <span class="text-[10px] bg-emerald-950/80 text-[#4ade80] px-2 py-0.5 rounded font-mono border border-emerald-800/40">Região</span>
               </div>
               <div class="space-y-3 text-xs">
-                <div class="flex justify-between items-center bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                <div class="flex justify-between items-center bg-slate-900/80 p-2.5 rounded-xl border border-emerald-900/40">
                   <span class="font-medium text-slate-200">📍 Criciúma (Campus & Entorno)</span>
-                  <span class="font-bold text-emerald-400">142 acessos</span>
+                  <span class="font-bold text-[#4ade80]">142 acessos</span>
                 </div>
-                <div class="flex justify-between items-center bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                <div class="flex justify-between items-center bg-slate-900/80 p-2.5 rounded-xl border border-emerald-900/40">
                   <span class="font-medium text-slate-200">📍 Içara</span>
-                  <span class="font-bold text-emerald-400">78 acessos</span>
+                  <span class="font-bold text-[#4ade80]">78 acessos</span>
                 </div>
-                <div class="flex justify-between items-center bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                <div class="flex justify-between items-center bg-slate-900/80 p-2.5 rounded-xl border border-emerald-900/40">
                   <span class="font-medium text-slate-200">📍 Araranguá</span>
-                  <span class="font-bold text-emerald-400">54 acessos</span>
+                  <span class="font-bold text-[#4ade80]">54 acessos</span>
                 </div>
-                <div class="flex justify-between items-center bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                <div class="flex justify-between items-center bg-slate-900/80 p-2.5 rounded-xl border border-emerald-900/40">
                   <span class="font-medium text-slate-200">📍 Tubarão</span>
-                  <span class="font-bold text-emerald-400">31 acessos</span>
+                  <span class="font-bold text-[#4ade80]">31 acessos</span>
                 </div>
               </div>
             </div>
-            <button onclick="alert('Relatório detalhado por blocos em breve!')" class="w-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 text-xs py-2 rounded-xl border border-slate-700 transition-all mt-4">
+            <button onclick="alert('Relatório detalhado por blocos em breve!')" class="w-full bg-emerald-950/40 hover:bg-emerald-900/40 text-slate-300 text-xs py-2 rounded-xl border border-emerald-900/60 transition-all mt-4">
               Ver mapa completo do campus &rarr;
             </button>
           </div>
@@ -411,12 +434,12 @@
         </div>
 
         <!-- FORMULÁRIO PARA CADASTRAR PRODUTOS -->
-        <div class="bg-[#0e1320]/80 border border-slate-800/80 p-6 rounded-2xl space-y-4">
+        <div class="bg-[#0b180f]/80 border border-emerald-900/50 p-6 rounded-2xl space-y-4">
           <h3 class="text-sm font-bold text-white">Adicionar Novo Item ao Seu Catálogo</h3>
           <form onsubmit="handleAddProduct(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <input type="text" id="prod-title" required placeholder="Nome do item (ex: Trufa Maracujá)" class="bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white">
-            <input type="number" step="0.01" id="prod-price" required placeholder="Preço (Ex: 5.00)" class="bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white">
-            <button type="submit" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs py-2 rounded-xl">+ Cadastrar Produto</button>
+            <input type="text" id="prod-title" required placeholder="Nome do item (ex: Trufa Maracujá)" class="bg-slate-900/90 border border-emerald-900/50 rounded-xl px-3 py-2 text-xs text-white">
+            <input type="number" step="0.01" id="prod-price" required placeholder="Preço (Ex: 5.00)" class="bg-slate-900/90 border border-emerald-900/50 rounded-xl px-3 py-2 text-xs text-white">
+            <button type="submit" class="bg-[#2e7d4e] hover:bg-[#38965e] text-white font-bold text-xs py-2 rounded-xl border border-emerald-500/30">+ Cadastrar Produto</button>
           </form>
         </div>
       </section>
@@ -427,20 +450,20 @@
           <h2 class="text-2xl font-bold text-white">Criar Minha Página Profissional</h2>
           <p class="text-slate-400 text-xs mt-1">Em 1 minuto você terá sua presença digital pronta na empreenTEC.</p>
         </div>
-        <form onsubmit="handleInitialRegister(event)" class="bg-[#0e1320]/80 border border-slate-800/80 p-6 rounded-2xl space-y-4">
+        <form onsubmit="handleInitialRegister(event)" class="bg-[#0b180f]/80 border border-emerald-900/50 p-6 rounded-2xl space-y-4">
           <div>
             <label class="block text-xs font-semibold text-slate-300 mb-1">Seu Nome & Curso</label>
-            <input type="text" id="reg-name" required placeholder="Ex: João - Estudante de ADM" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white">
+            <input type="text" id="reg-name" required placeholder="Ex: João - Estudante de ADM" class="w-full bg-slate-900/90 border border-emerald-900/50 rounded-xl px-3.5 py-2 text-xs text-white">
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-300 mb-1">Nome do Negócio</label>
-            <input type="text" id="reg-business" required placeholder="Ex: Doces do João" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white">
+            <input type="text" id="reg-business" required placeholder="Ex: Doces do João" class="w-full bg-slate-900/90 border border-emerald-900/50 rounded-xl px-3.5 py-2 text-xs text-white">
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-300 mb-1">Chave PIX (Para receber pagamentos)</label>
-            <input type="text" id="reg-pix" required placeholder="Chave PIX do vendedor" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white">
+            <input type="text" id="reg-pix" required placeholder="Chave PIX do vendedor" class="w-full bg-slate-900/90 border border-emerald-900/50 rounded-xl px-3.5 py-2 text-xs text-white">
           </div>
-          <button type="submit" class="w-full bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs py-3 rounded-xl transition-all">
+          <button type="submit" class="w-full bg-[#2e7d4e] hover:bg-[#38965e] text-white font-bold text-xs py-3 rounded-xl transition-all border border-emerald-500/30">
             Publicar Minha Página na empreenTEC
           </button>
         </form>
@@ -452,25 +475,25 @@
 
   <!-- MODAL CARRINHO / CHECKOUT PIX AUTOMÁTICO -->
   <div id="cart-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-[#0e1320] border border-slate-800 w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
+    <div class="bg-[#0b180f] border border-emerald-900/60 w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
       <button onclick="toggleCartModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">&times;</button>
       <h3 class="text-lg font-bold text-white mb-4">Seu Carrinho</h3>
       
       <div id="cart-items" class="space-y-3 max-h-60 overflow-y-auto mb-4"></div>
       
-      <div class="border-t border-slate-800 pt-4 mb-4 flex justify-between items-center text-sm font-semibold">
+      <div class="border-t border-emerald-900/40 pt-4 mb-4 flex justify-between items-center text-sm font-semibold">
         <span>Total do Pedido:</span>
-        <span id="cart-total" class="text-emerald-400 font-bold text-base">R$ 0,00</span>
+        <span id="cart-total" class="text-[#4ade80] font-bold text-base">R$ 0,00</span>
       </div>
 
       <!-- ÁREA PIX GERADA -->
-      <div id="pix-area" class="hidden bg-slate-900 border border-emerald-500/30 p-4 rounded-xl text-center space-y-2 mb-4">
-        <span class="text-[10px] font-bold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded uppercase">Pagamento PIX</span>
+      <div id="pix-area" class="hidden bg-slate-900/90 border border-emerald-700/40 p-4 rounded-xl text-center space-y-2 mb-4">
+        <span class="text-[10px] font-bold bg-emerald-950/80 text-[#4ade80] px-2 py-0.5 rounded uppercase border border-emerald-700/40">Pagamento PIX</span>
         <p class="text-xs text-slate-300">Copie a Chave PIX do Vendedor:</p>
-        <p id="pix-key-display" class="text-xs font-mono text-emerald-400 bg-slate-950 p-2 rounded border border-slate-800 select-all truncate"></p>
+        <p id="pix-key-display" class="text-xs font-mono text-[#4ade80] bg-slate-950 p-2 rounded border border-emerald-900/60 select-all truncate"></p>
       </div>
 
-      <button id="btn-checkout" onclick="generatePixCheckout()" class="w-full bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs py-3 rounded-xl transition-all">
+      <button id="btn-checkout" onclick="generatePixCheckout()" class="w-full bg-[#4ade80] hover:bg-[#3cd072] text-slate-950 font-bold text-xs py-3 rounded-xl transition-all">
         Gerar Chave PIX
       </button>
     </div>
@@ -513,6 +536,11 @@
       }
     };
 
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
     function switchView(viewId) {
       document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden'));
       const target = document.getElementById('view-' + viewId);
@@ -534,19 +562,19 @@
         if (filter !== 'all' && item.category !== filter) return;
         const card = document.createElement('div');
         card.onclick = () => openEntrepreneurProfile(item.id);
-        card.className = 'bg-[#0e1320]/80 border border-slate-800/80 hover:border-emerald-500/50 p-6 rounded-2xl cursor-pointer transition-all flex flex-col justify-between group';
+        card.className = 'bg-[#0b180f]/80 border border-emerald-900/50 hover:border-emerald-500/50 p-5 md:p-6 rounded-2xl cursor-pointer transition-all flex flex-col justify-between group';
         card.innerHTML = `
           <div>
             <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">${item.link}</span>
-              <span class="text-[10px] font-bold text-slate-300 bg-slate-800 px-2 py-0.5 rounded">${item.status}</span>
+              <span class="text-[10px] font-mono text-[#4ade80] bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/40">${item.link}</span>
+              <span class="text-[10px] font-bold text-slate-300 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-900/40">${item.status}</span>
             </div>
-            <h3 class="text-xl font-bold text-white mt-2 mb-1 group-hover:text-emerald-400 transition-colors">${item.businessName}</h3>
+            <h3 class="text-xl font-bold text-white mt-2 mb-1 group-hover:text-[#4ade80] transition-colors">${item.businessName}</h3>
             <p class="text-xs text-slate-400 mb-4">${item.bio}</p>
           </div>
-          <div class="flex items-center justify-between pt-4 border-t border-slate-800/60 text-xs">
-            <span class="text-slate-500">${item.name}</span>
-            <span class="text-emerald-400 font-semibold group-hover:translate-x-1 transition-transform">Ver Perfil &rarr;</span>
+          <div class="flex items-center justify-between pt-4 border-t border-emerald-900/40 text-xs">
+            <span class="text-slate-400">${item.name}</span>
+            <span class="text-[#4ade80] font-semibold group-hover:translate-x-1 transition-transform">Ver Perfil &rarr;</span>
           </div>
         `;
         container.appendChild(card);
@@ -559,28 +587,28 @@
       currentVendorPix = data.pixKey;
 
       document.getElementById('profile-header').innerHTML = `
-        <div class="flex justify-between items-start">
+        <div class="flex flex-col sm:flex-row justify-between items-start gap-4">
           <div>
-            <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20">${data.link}</span>
-            <h2 class="text-3xl font-extrabold text-white mt-3 mb-1">${data.businessName}</h2>
+            <span class="text-xs font-mono text-[#4ade80] bg-emerald-950/60 px-2.5 py-1 rounded border border-emerald-800/40">${data.link}</span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-white mt-3 mb-1">${data.businessName}</h2>
             <p class="text-xs text-slate-400">${data.name}</p>
           </div>
-          <button onclick="navigator.clipboard.writeText('${data.link}'); alert('Link do perfil copiado!')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-3 py-1.5 rounded-lg border border-slate-700">📋 Copiar Link</button>
+          <button onclick="navigator.clipboard.writeText('${data.link}'); alert('Link do perfil copiado!')" class="bg-emerald-950/40 hover:bg-emerald-900/40 text-slate-200 text-xs px-3 py-1.5 rounded-lg border border-emerald-800/40">📋 Copiar Link</button>
         </div>
-        <p class="text-xs text-slate-300 leading-relaxed mt-4 border-t border-slate-800/80 pt-3">${data.bio}</p>
+        <p class="text-xs text-slate-300 leading-relaxed mt-4 border-t border-emerald-900/40 pt-3">${data.bio}</p>
       `;
 
       const productsContainer = document.getElementById('profile-products');
       productsContainer.innerHTML = '';
       data.products.forEach(prod => {
         const div = document.createElement('div');
-        div.className = 'bg-[#0e1320]/80 border border-slate-800/80 p-4 rounded-xl flex items-center justify-between';
+        div.className = 'bg-[#0b180f]/80 border border-emerald-900/50 p-4 rounded-xl flex items-center justify-between';
         div.innerHTML = `
           <div>
             <h4 class="text-xs font-bold text-white">${prod.title}</h4>
-            <p class="text-sm font-bold text-emerald-400 mt-1">R$ ${prod.price.toFixed(2)}</p>
+            <p class="text-sm font-bold text-[#4ade80] mt-1">R$ ${prod.price.toFixed(2)}</p>
           </div>
-          <button onclick="addToCart('${prod.title}', ${prod.price})" class="bg-emerald-400 hover:bg-emerald-300 text-slate-950 text-xs font-bold px-3 py-1.5 rounded-lg">+ Carrinho</button>
+          <button onclick="addToCart('${prod.title}', ${prod.price})" class="bg-[#4ade80] hover:bg-[#3cd072] text-slate-950 text-xs font-bold px-3 py-1.5 rounded-lg">+ Carrinho</button>
         `;
         productsContainer.appendChild(div);
       });
@@ -601,8 +629,8 @@
       cart.forEach((item) => {
         total += item.price;
         const div = document.createElement('div');
-        div.className = 'flex justify-between items-center bg-slate-900 p-2 rounded text-xs';
-        div.innerHTML = `<span>${item.title}</span><span class="text-emerald-400 font-bold">R$ ${item.price.toFixed(2)}</span>`;
+        div.className = 'flex justify-between items-center bg-slate-900/80 p-2 rounded text-xs border border-emerald-900/40';
+        div.innerHTML = `<span>${item.title}</span><span class="text-[#4ade80] font-bold">R$ ${item.price.toFixed(2)}</span>`;
         container.appendChild(div);
       });
       document.getElementById('cart-total').innerText = `R$ ${total.toFixed(2)}`;
@@ -625,13 +653,13 @@
       if (!input.value.trim()) return;
 
       const userMsg = document.createElement('div');
-      userMsg.className = 'bg-emerald-500/20 border border-emerald-500/30 p-2.5 rounded-lg text-emerald-300 max-w-[85%] ml-auto text-right';
+      userMsg.className = 'bg-emerald-950/60 border border-emerald-800/40 p-2.5 rounded-lg text-emerald-300 max-w-[85%] ml-auto text-right';
       userMsg.innerText = input.value;
       box.appendChild(userMsg);
 
       setTimeout(() => {
         const replyMsg = document.createElement('div');
-        replyMsg.className = 'bg-slate-800/80 p-2.5 rounded-lg text-slate-300 max-w-[85%]';
+        replyMsg.className = 'bg-emerald-950/40 p-2.5 rounded-lg text-slate-300 max-w-[85%] border border-emerald-900/30';
         replyMsg.innerText = "Combinado! Estou no intervalo das 20h30 perto da cantina.";
         box.appendChild(replyMsg);
         box.scrollTop = box.scrollHeight;
@@ -671,7 +699,7 @@
             datasets: [{
               label: 'Acessos',
               data: [120, 240, 310, 180, 398],
-              borderColor: '#34d399',
+              borderColor: '#4ade80',
               tension: 0.4
             }]
           },
@@ -693,7 +721,7 @@
             labels: ['NFC (pulseira)', 'Link direto', 'Busca na plataforma', 'Redes sociais'],
             datasets: [{
               data: [42, 28, 18, 8],
-              backgroundColor: ['#34d399', '#2dd4bf', '#059669', '#475569'],
+              backgroundColor: ['#4ade80', '#2e7d4e', '#1b4329', '#475569'],
               borderWidth: 0
             }]
           },
